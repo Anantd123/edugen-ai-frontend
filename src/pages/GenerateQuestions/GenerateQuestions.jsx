@@ -89,7 +89,7 @@ function GenerateQuestions() {
 
         const response =
           await axios.post(
-            "https://edugen-ai-backend-9yu7.onrender.com/api/questions/generate",
+            "https://edugen-ai-backend-4.onrender.com/api/questions/generate",
             formData,
             {
               headers: {
