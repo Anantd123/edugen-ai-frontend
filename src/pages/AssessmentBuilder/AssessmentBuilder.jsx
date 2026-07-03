@@ -319,8 +319,6 @@ function AssessmentBuilder() {
                 sm: "1.4rem",
               },
             }}
-            fontWeight={700}
-            mb={3}
           >
             Selected Questions (
             {selectedQuestions.length}
@@ -511,17 +509,16 @@ function AssessmentBuilder() {
           </DialogContentText>
         </DialogContent>
 
-        <DialogActions>
+        <DialogActions
           sx={{
             flexDirection: {
               xs: "column",
               sm: "row",
             },
-
             gap: 1,
-
             p: 2,
           }}
+        >
           <Button
 
             onClick={() =>

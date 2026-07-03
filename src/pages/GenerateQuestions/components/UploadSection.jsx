@@ -8,27 +8,17 @@ function UploadSection({
   setFile,
 }) {
 
-  const handleFileChange = (
-    event
-  ) => {
+  const handleFileChange = (event) => {
 
-    const selectedFile =
-      event.target.files[0];
+    const selectedFile = event.target.files[0];
 
-    if (selectedFile) {
+    if (!selectedFile) return;
 
-      console.log(
-        "Selected File:",
-        selectedFile.name
-      );
+    console.log("Selected File:", selectedFile.name);
+    console.log("File Type:", selectedFile.type);
+    console.log("File Size:", selectedFile.size);
 
-      console.log(
-        "File Type:",
-        selectedFile.type
-      );
-
-      setFile(selectedFile);
-    }
+    setFile(selectedFile);
   };
 
   return (
@@ -159,9 +149,12 @@ function UploadSection({
           hidden
           type="file"
           accept=".pdf,.docx,.pptx,.txt,.jpg,.jpeg,.png"
-          onChange={
-            handleFileChange
-          }
+          onChange={(event) => {
+            handleFileChange(event);
+
+            // Reset input so same file can be selected again
+            event.target.value = "";
+          }}
         />
       </Box>
     </Paper>
