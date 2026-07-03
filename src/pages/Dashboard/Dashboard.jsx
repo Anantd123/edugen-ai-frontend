@@ -66,7 +66,11 @@ function Dashboard() {
       <Card
         sx={{
           mb: 4,
-          p: 2,
+          p: {
+            xs: 2,
+            sm: 3,
+            md: 4,
+          },
           borderRadius: "28px",
           background:
             "linear-gradient(135deg,#8B5CF6,#6D28D9)",
@@ -78,9 +82,15 @@ function Dashboard() {
         <CardContent>
 
           <Typography
-            variant="h3"
             fontWeight={800}
             mb={1}
+            sx={{
+              fontSize: {
+                xs: "2rem",
+                sm: "2.6rem",
+                md: "3rem",
+              },
+            }}
           >
             🤖 EduGen AI
           </Typography>
@@ -89,7 +99,11 @@ function Dashboard() {
             sx={{
               opacity: 0.95,
               mb: 2,
-              fontSize: "1.1rem",
+              fontSize: {
+                xs: ".95rem",
+                sm: "1rem",
+                md: "1.1rem",
+              },
             }}
           >
             Generate intelligent assessments from
@@ -107,27 +121,31 @@ function Dashboard() {
             Question Bank • Assessment Builder
           </Typography>
 
-<Button
-  variant="contained"
-  onClick={() =>
-    navigate("/generate-questions")
-  }
-  sx={{
-    bgcolor: "#fff",
-    color: "#6D28D9",
-    fontWeight: 700,
-    borderRadius: "12px",
-    px: 4,
-    py: 1.2,
-    textTransform: "none",
-    fontSize: "1rem",
-    "&:hover": {
-      bgcolor: "#f3f4f6",
-    },
-  }}
->
-  ✨ Create Assessment Now
-</Button>
+          <Button
+            variant="contained"
+            onClick={() =>
+              navigate("/generate-questions")
+            }
+            sx={{
+              bgcolor: "#fff",
+              color: "#6D28D9",
+              fontWeight: 700,
+              borderRadius: "12px",
+              px: 4,
+              py: 1.5,
+              textTransform: "none",
+              fontSize: "1rem",
+              width: {
+                xs: "100%",
+                sm: "auto",
+              },
+              "&:hover": {
+                bgcolor: "#f3f4f6",
+              },
+            }}
+          >
+            ✨ Create Assessment Now
+          </Button>
 
         </CardContent>
       </Card>
@@ -135,8 +153,10 @@ function Dashboard() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(240px,1fr))",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2,1fr)",
+          },
           gap: 3,
           mb: 4,
         }}
@@ -146,7 +166,10 @@ function Dashboard() {
           sx={{
             bgcolor: "#212121",
             border: "1px solid #333",
-            borderRadius: "20px",
+            borderRadius: {
+              xs: "16px",
+              md: "20px",
+            },
           }}
         >
           <CardContent>
@@ -334,8 +357,11 @@ function Dashboard() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fit,minmax(250px,1fr))",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2,1fr)",
+                lg: "repeat(4,1fr)",
+              },
               gap: 2,
             }}
           >

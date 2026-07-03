@@ -33,23 +33,23 @@ function QuestionReview() {
         )
       ) || [];
 
-const formattedQuestions =
-  savedQuestions.map(
-    (q, index) => ({
-      id:
-        Date.now() +
-        Math.floor(
-          Math.random() * 10000
-        ) +
-        index,
+    const formattedQuestions =
+      savedQuestions.map(
+        (q, index) => ({
+          id:
+            Date.now() +
+            Math.floor(
+              Math.random() * 10000
+            ) +
+            index,
 
-      type: q.type,
-      question: q.question,
-      options: q.options || [],
-      approved: false,
-      selected: false,
-    })
-  );
+          type: q.type,
+          question: q.question,
+          options: q.options || [],
+          approved: false,
+          selected: false,
+        })
+      );
 
     setQuestions(
       formattedQuestions
@@ -63,9 +63,9 @@ const formattedQuestions =
       prev.map((q) =>
         q.id === id
           ? {
-              ...q,
-              selected: !q.selected,
-            }
+            ...q,
+            selected: !q.selected,
+          }
           : q
       )
     );
@@ -78,9 +78,9 @@ const formattedQuestions =
       prev.map((q) =>
         q.id === id
           ? {
-              ...q,
-              approved: true,
-            }
+            ...q,
+            approved: true,
+          }
           : q
       )
     );
@@ -125,9 +125,9 @@ const formattedQuestions =
       prev.map((q) =>
         q.id === id
           ? {
-              ...q,
-              question: editedText,
-            }
+            ...q,
+            question: editedText,
+          }
           : q
       )
     );
@@ -209,10 +209,14 @@ const formattedQuestions =
   return (
     <Box>
       <Typography
-        variant="h3"
         sx={{
           fontWeight: 800,
           mb: 1,
+          fontSize: {
+            xs: "2rem",
+            sm: "2.5rem",
+            md: "3rem",
+          },
         }}
       >
         AI Generated Questions ✨
@@ -220,7 +224,13 @@ const formattedQuestions =
 
       <Typography
         color="text.secondary"
-        sx={{ mb: 2 }}
+        sx={{
+          mb: 2,
+          fontSize: {
+            xs: ".95rem",
+            sm: "1rem",
+          },
+        }}
       >
         Review and approve
         questions before adding
@@ -243,14 +253,27 @@ const formattedQuestions =
       </Typography>
 
       <Button
+        fullWidth
         variant="contained"
         onClick={
           saveToQuestionBank
         }
         sx={{
           mb: 4,
+          py: 1.5,
+          borderRadius: "14px",
           background:
             "linear-gradient(90deg,#8B5CF6,#7C3AED)",
+
+          width: {
+            xs: "100%",
+            sm: "fit-content",
+          },
+
+          "&:hover": {
+            background:
+              "linear-gradient(90deg,#7C3AED,#6D28D9)",
+          },
         }}
       >
         Save To Question Bank
@@ -260,9 +283,15 @@ const formattedQuestions =
         <Paper
           key={q.id}
           sx={{
-            p: 3,
+            p: {
+              xs: 2,
+              sm: 3,
+            },
             mb: 3,
-            borderRadius: "20px",
+            borderRadius: {
+              xs: "16px",
+              md: "20px",
+            },
             backgroundColor:
               "#212121",
 
@@ -272,10 +301,16 @@ const formattedQuestions =
           }}
         >
           <Stack
-            direction="row"
+            direction={{
+              xs: "column",
+              sm: "row",
+            }}
             spacing={1}
             mb={2}
-            alignItems="center"
+            alignItems={{
+              xs: "flex-start",
+              sm: "center",
+            }}
           >
             <Checkbox
               checked={
@@ -302,7 +337,7 @@ const formattedQuestions =
           </Stack>
 
           {editingId ===
-          q.id ? (
+            q.id ? (
             <TextField
               fullWidth
               value={
@@ -321,9 +356,15 @@ const formattedQuestions =
               }}
             >
               <Typography
-                variant="h6"
                 sx={{
                   mb: 2,
+                  fontWeight: 700,
+                  fontSize: {
+                    xs: "1rem",
+                    sm: "1.15rem",
+                    md: "1.3rem",
+                  },
+                  lineHeight: 1.6,
                 }}
               >
                 {q.question}
@@ -341,15 +382,22 @@ const formattedQuestions =
                         index
                       }
                       sx={{
-                        ml: 2,
+                        ml: {
+                          xs: 0,
+                          sm: 2,
+                        },
                         mb: 1,
-                        color:
-                          "#BDBDBD",
+                        color: "#BDBDBD",
+                        fontSize: {
+                          xs: ".9rem",
+                          sm: "1rem",
+                        },
+                        wordBreak: "break-word",
                       }}
                     >
                       {String.fromCharCode(
                         65 +
-                          index
+                        index
                       )}
                       .{" "}
                       {option}
@@ -360,29 +408,35 @@ const formattedQuestions =
           )}
 
           <Stack
-            direction="row"
+            direction={{
+              xs: "column",
+              sm: "row",
+            }}
             spacing={2}
           >
-            {editingId ===
-            q.id ? (
+            {editingId === q.id ? (
               <Button
                 variant="contained"
-                onClick={() =>
-                  saveEdit(
-                    q.id
-                  )
-                }
+                onClick={() => saveEdit(q.id)}
+                sx={{
+                  width: {
+                    xs: "100%",
+                    sm: "auto",
+                  },
+                }}
               >
                 Save
               </Button>
             ) : (
               <Button
                 variant="outlined"
-                onClick={() =>
-                  handleEdit(
-                    q
-                  )
-                }
+                onClick={() => handleEdit(q)}
+                sx={{
+                  width: {
+                    xs: "100%",
+                    sm: "auto",
+                  },
+                }}
               >
                 Edit
               </Button>
@@ -390,26 +444,26 @@ const formattedQuestions =
 
             <Button
               color="error"
-              onClick={() =>
-                handleDelete(
-                  q.id
-                )
-              }
+              onClick={() => handleDelete(q.id)}
+              sx={{
+                width: {
+                  xs: "100%",
+                  sm: "auto",
+                },
+              }}
             >
               Delete
             </Button>
 
             <Button
               variant="contained"
-              disabled={
-                q.approved
-              }
-              onClick={() =>
-                handleApprove(
-                  q.id
-                )
-              }
+              disabled={q.approved}
+              onClick={() => handleApprove(q.id)}
               sx={{
+                width: {
+                  xs: "100%",
+                  sm: "auto",
+                },
                 background:
                   q.approved
                     ? "#4CAF50"

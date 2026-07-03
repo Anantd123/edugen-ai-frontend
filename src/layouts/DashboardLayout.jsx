@@ -1,21 +1,32 @@
 import { Box } from "@mui/material";
+import { useState } from "react";
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import Topbar from "../components/Topbar/Topbar";
 
 function DashboardLayout({ children }) {
+
+  const [mobileOpen, setMobileOpen] =
+    useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   return (
     <Box
       sx={{
         display: "flex",
-        height: "100vh",
-        overflow: "hidden",
+        minHeight: "100vh",
         bgcolor: "#121212",
       }}
     >
       {/* Sidebar */}
 
-      <Sidebar />
+      <Sidebar
+        mobileOpen={mobileOpen}
+        onDrawerToggle={handleDrawerToggle}
+      />
 
       {/* Main Content */}
 
@@ -24,14 +35,17 @@ function DashboardLayout({ children }) {
           flex: 1,
           display: "flex",
           flexDirection: "column",
+          minWidth: 0,
           overflow: "hidden",
         }}
       >
         {/* Topbar */}
 
-        <Topbar />
+        <Topbar
+          onMenuClick={handleDrawerToggle}
+        />
 
-        {/* Scrollable Area */}
+        {/* Scrollable Content */}
 
         <Box
           sx={{
@@ -52,19 +66,24 @@ function DashboardLayout({ children }) {
             },
           }}
         >
-          {/* Page Content */}
-
           <Box
             sx={{
-              p: 4,
-              minHeight: "calc(100vh - 64px)",
+              width: "100%",
+              maxWidth: "1600px",
+              mx: "auto",
+
+              p: {
+                xs: 2,
+                sm: 3,
+                md: 4,
+                lg: 5,
+              },
+
+              minHeight: "calc(100vh - 70px)",
             }}
           >
             {children}
           </Box>
-
-          {/* Global Footer */}
-
         </Box>
       </Box>
     </Box>

@@ -91,20 +91,16 @@ function AssessmentConfig() {
       let updatedTypes;
 
       if (
-        selectedTypes.includes(
-          type
-        )
+        selectedTypes.includes(type)
       ) {
 
         updatedTypes =
           selectedTypes.filter(
-            (t) =>
-              t !== type
+            (t) => t !== type
           );
 
         if (
-          updatedTypes.length ===
-          0
+          updatedTypes.length === 0
         ) {
           updatedTypes = [
             "MCQ",
@@ -124,23 +120,91 @@ function AssessmentConfig() {
       );
     };
 
+  const optionStyle = (
+    active
+  ) => ({
+    flex: {
+      xs: "1 1 100%",
+      sm: "1 1 calc(50% - 8px)",
+      md: "0 0 auto",
+    },
+
+    minWidth: {
+      md: 170,
+    },
+
+    px: {
+      xs: 2,
+      sm: 3,
+      md: 4,
+    },
+
+    py: {
+      xs: 1.8,
+      md: 2,
+    },
+
+    textAlign: "center",
+
+    borderRadius: {
+      xs: "14px",
+      md: "16px",
+    },
+
+    cursor: "pointer",
+
+    border: active
+      ? "2px solid #8B5CF6"
+      : "1px solid #333",
+
+    background: active
+      ? "rgba(139,92,246,0.15)"
+      : "#202020",
+
+    transition: ".25s",
+
+    "&:hover": {
+      border:
+        "2px solid #8B5CF6",
+      transform:
+        "translateY(-2px)",
+    },
+  });
+
   return (
     <Paper
       sx={{
-        p: 5,
-        borderRadius:
-          "24px",
+        p: {
+          xs: 2,
+          sm: 3,
+          md: 4,
+        },
+
+        borderRadius: {
+          xs: "18px",
+          md: "24px",
+        },
+
         background:
           "linear-gradient(180deg,#1A1A1A,#181818)",
+
         border:
           "1px solid #2E2E2E",
+
         mb: 4,
       }}
     >
+
       <Typography
-        variant="h5"
-        fontWeight={700}
-        mb={4}
+        sx={{
+          fontWeight: 700,
+          mb: 4,
+          fontSize: {
+            xs: "1.4rem",
+            sm: "1.7rem",
+            md: "1.9rem",
+          },
+        }}
       >
         ⚙️ Assessment Configuration
       </Typography>
@@ -148,8 +212,14 @@ function AssessmentConfig() {
       {/* Question Types */}
 
       <Typography
-        variant="h6"
-        mb={2}
+        sx={{
+          mb: 2,
+          fontWeight: 700,
+          fontSize: {
+            xs: "1.05rem",
+            md: "1.2rem",
+          },
+        }}
       >
         Question Types
       </Typography>
@@ -159,7 +229,7 @@ function AssessmentConfig() {
           display: "flex",
           flexWrap: "wrap",
           gap: 2,
-          mb: 5,
+          mb: 4,
         }}
       >
         {questionTypes.map(
@@ -167,42 +237,13 @@ function AssessmentConfig() {
             <Box
               key={type}
               onClick={() =>
-                handleTypeClick(
+                handleTypeClick(type)
+              }
+              sx={optionStyle(
+                selectedTypes.includes(
                   type
                 )
-              }
-              sx={{
-                px: 3,
-                py: 2,
-                borderRadius:
-                  "16px",
-                cursor:
-                  "pointer",
-
-                border:
-                  selectedTypes.includes(
-                    type
-                  )
-                    ? "2px solid #8B5CF6"
-                    : "1px solid #333",
-
-                background:
-                  selectedTypes.includes(
-                    type
-                  )
-                    ? "rgba(139,92,246,0.15)"
-                    : "#202020",
-
-                transition:
-                  "all .3s",
-
-                "&:hover": {
-                  border:
-                    "2px solid #8B5CF6",
-                  transform:
-                    "translateY(-2px)",
-                },
-              }}
+              )}
             >
               <Typography
                 fontWeight={600}
@@ -221,8 +262,14 @@ function AssessmentConfig() {
       {/* Difficulty */}
 
       <Typography
-        variant="h6"
-        mb={2}
+        sx={{
+          mb: 2,
+          fontWeight: 700,
+          fontSize: {
+            xs: "1.05rem",
+            md: "1.2rem",
+          },
+        }}
       >
         Difficulty Level
       </Typography>
@@ -230,9 +277,9 @@ function AssessmentConfig() {
       <Box
         sx={{
           display: "flex",
-          gap: 2,
           flexWrap: "wrap",
-          mb: 5,
+          gap: 2,
+          mb: 4,
         }}
       >
         {difficultyLevels.map(
@@ -240,47 +287,16 @@ function AssessmentConfig() {
             <Box
               key={level}
               onClick={() =>
-                setDifficulty(
-                  level
-                )
+                setDifficulty(level)
               }
-              sx={{
-                px: 4,
-                py: 2,
-                borderRadius:
-                  "16px",
-
-                cursor:
-                  "pointer",
-
-                border:
-                  difficulty ===
-                  level
-                    ? "2px solid #8B5CF6"
-                    : "1px solid #333",
-
-                background:
-                  difficulty ===
-                  level
-                    ? "rgba(139,92,246,0.15)"
-                    : "#202020",
-
-                transition:
-                  "all .3s",
-
-                "&:hover": {
-                  border:
-                    "2px solid #8B5CF6",
-                  transform:
-                    "translateY(-2px)",
-                },
-              }}
+              sx={optionStyle(
+                difficulty === level
+              )}
             >
               <Typography
                 fontWeight={600}
               >
-                {difficulty ===
-                level
+                {difficulty === level
                   ? `✓ ${level}`
                   : level}
               </Typography>
@@ -292,8 +308,14 @@ function AssessmentConfig() {
       {/* Question Count */}
 
       <Typography
-        variant="h6"
-        mb={2}
+        sx={{
+          mb: 2,
+          fontWeight: 700,
+          fontSize: {
+            xs: "1.05rem",
+            md: "1.2rem",
+          },
+        }}
       >
         Number of Questions
       </Typography>
@@ -301,8 +323,8 @@ function AssessmentConfig() {
       <Box
         sx={{
           display: "flex",
-          gap: 2,
           flexWrap: "wrap",
+          gap: 2,
         }}
       >
         {questionCounts.map(
@@ -314,37 +336,10 @@ function AssessmentConfig() {
                   count
                 )
               }
-              sx={{
-                px: 4,
-                py: 2,
-                borderRadius:
-                  "16px",
-
-                cursor:
-                  "pointer",
-
-                border:
-                  questionCount ===
+              sx={optionStyle(
+                questionCount ===
                   count
-                    ? "2px solid #8B5CF6"
-                    : "1px solid #333",
-
-                background:
-                  questionCount ===
-                  count
-                    ? "rgba(139,92,246,0.15)"
-                    : "#202020",
-
-                transition:
-                  "all .3s",
-
-                "&:hover": {
-                  border:
-                    "2px solid #8B5CF6",
-                  transform:
-                    "translateY(-2px)",
-                },
-              }}
+              )}
             >
               <Typography
                 fontWeight={600}

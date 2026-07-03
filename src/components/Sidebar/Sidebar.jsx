@@ -14,11 +14,16 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Drawer,
+  useMediaQuery,
 } from "@mui/material";
 
+import { useTheme } from "@mui/material/styles";
 import { Link, useLocation } from "react-router-dom";
 
 import logo from "../../assets/logo.png";
+
+const drawerWidth = 260;
 
 const menuItems = [
   {
@@ -53,79 +58,103 @@ const menuItems = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({
+  mobileOpen,
+  onDrawerToggle,
+}) {
   const location = useLocation();
 
-  return (
+  const theme = useTheme();
+
+  const isMobile = useMediaQuery(
+    theme.breakpoints.down("md")
+  );
+
+  const drawerContent = (
     <Box
       sx={{
-        width: 260,
-        height: "100vh",
+        width: drawerWidth,
+        height: "100%",
         bgcolor: "#212121",
-        borderRight: "1px solid #333",
-        p: 2,
+        color: "#fff",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      {/* Logo + Brand */}
+      {/* Logo */}
+
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 1.5,
-          mb: 4,
-          px: 1,
+          gap: 2,
+          px: 3,
+          py: 3,
+          borderBottom: "1px solid #333",
         }}
       >
         <Box
           component="img"
           src={logo}
-          alt="EduGen AI Logo"
+          alt="EduGen AI"
           sx={{
             width: 48,
             height: 48,
-            objectFit: "contain",
-            borderRadius: "10px",
-            background: "#fff",
+            bgcolor: "#fff",
+            borderRadius: 2,
             p: 0.5,
           }}
         />
 
         <Box>
           <Typography
-            variant="h6"
             sx={{
               fontWeight: 800,
-              color: "#FFFFFF",
-              lineHeight: 1.1,
+              fontSize: "1.15rem",
+              lineHeight: 1,
             }}
           >
             EduGen AI
           </Typography>
 
           <Typography
-            variant="caption"
             sx={{
               color: "#8B5CF6",
+              fontSize: ".72rem",
               fontWeight: 600,
-              letterSpacing: "0.5px",
+              mt: 0.5,
             }}
           >
-             
             ANANTAY APEX
           </Typography>
         </Box>
       </Box>
 
-      <List>
+      {/* Menu */}
+
+      <List
+        sx={{
+          px: 2,
+          py: 2,
+        }}
+      >
         {menuItems.map((item) => (
           <ListItemButton
             key={item.text}
             component={Link}
             to={item.path}
-            selected={location.pathname === item.path}
+            onClick={() => {
+              if (isMobile) {
+                onDrawerToggle();
+              }
+            }}
+            selected={
+              location.pathname === item.path
+            }
             sx={{
-              borderRadius: "12px",
               mb: 1,
+              borderRadius: 3,
+              py: 1.2,
 
               "&.Mui-selected": {
                 background:
@@ -138,17 +167,17 @@ function Sidebar() {
               },
 
               "&:hover": {
-                backgroundColor: "#2A2A2A",
+                bgcolor: "#2d2d2d",
               },
             }}
           >
             <ListItemIcon
               sx={{
+                minWidth: 40,
                 color:
                   location.pathname === item.path
                     ? "#fff"
-                    : "#BDBDBD",
-                minWidth: "40px",
+                    : "#A3A3A3",
               }}
             >
               {item.icon}
@@ -160,7 +189,68 @@ function Sidebar() {
           </ListItemButton>
         ))}
       </List>
+
+      {/* Footer */}
+
+      <Box
+        sx={{
+          mt: "auto",
+          p: 2,
+          textAlign: "center",
+          borderTop: "1px solid #333",
+        }}
+      >
+        <Typography
+          variant="caption"
+          color="text.secondary"
+        >
+          EduGen AI v1.0
+        </Typography>
+      </Box>
     </Box>
+  );
+
+  if (isMobile) {
+    return (
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={onDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            bgcolor: "#212121",
+            borderRight:
+              "1px solid #333",
+          },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+    );
+  }
+
+  return (
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+          boxSizing: "border-box",
+          bgcolor: "#212121",
+          borderRight:
+            "1px solid #333",
+        },
+      }}
+    >
+      {drawerContent}
+    </Drawer>
   );
 }
 

@@ -111,7 +111,7 @@ function Profile() {
               doc.text(
                 `${String.fromCharCode(
                   65 +
-                    optionIndex
+                  optionIndex
                 )}. ${option}`,
                 30,
                 y
@@ -133,10 +133,22 @@ function Profile() {
 
   return (
     <Box>
+
+      sx={{
+        width: "100%",
+        maxWidth: "1000px",
+        mx: "auto",
+      }}
       <Typography
-        variant="h3"
-        fontWeight={800}
-        mb={1}
+        sx={{
+          fontWeight: 800,
+          mb: 1,
+          fontSize: {
+            xs: "2rem",
+            sm: "2.5rem",
+            md: "3rem",
+          },
+        }}
       >
         Profile 👨‍🏫
       </Typography>
@@ -151,7 +163,10 @@ function Profile() {
       {history.length === 0 ? (
         <Paper
           sx={{
-            p: 5,
+            p: {
+              xs: 3,
+              sm: 5,
+            },
             textAlign: "center",
           }}
         >
@@ -165,19 +180,36 @@ function Profile() {
                 assessment.id
               }
               sx={{
-                p: 3,
+                p: {
+                  xs: 2,
+                  sm: 3,
+                },
+
                 mb: 3,
-                borderRadius:
-                  "20px",
-                background:
-                  "#1E1E1E",
-                border:
-                  "1px solid #333",
+
+                borderRadius: {
+                  xs: "16px",
+                  md: "20px",
+                },
+
+                background: "#1E1E1E",
+
+                border: "1px solid #333",
               }}
             >
               <Typography
-                variant="h6"
-                mb={1}
+                sx={{
+                  mb: 1,
+
+                  fontWeight: 700,
+
+                  fontSize: {
+                    xs: "1.15rem",
+                    sm: "1.35rem",
+                  },
+
+                  wordBreak: "break-word",
+                }}
               >
                 {
                   assessment.assessmentName
@@ -186,6 +218,14 @@ function Profile() {
 
               <Typography>
                 Questions:
+                <Typography
+                  sx={{
+                    fontSize: {
+                      xs: ".95rem",
+                      sm: "1rem",
+                    },
+                  }}
+                ></Typography>
                 {" "}
                 {
                   assessment
@@ -196,6 +236,14 @@ function Profile() {
 
               <Typography>
                 Marks:
+                <Typography
+                  sx={{
+                    fontSize: {
+                      xs: ".95rem",
+                      sm: "1rem",
+                    },
+                  }}
+                ></Typography>
                 {" "}
                 {
                   assessment.marks
@@ -204,6 +252,14 @@ function Profile() {
 
               <Typography>
                 Duration:
+                <Typography
+                  sx={{
+                    fontSize: {
+                      xs: ".95rem",
+                      sm: "1rem",
+                    },
+                  }}
+                ></Typography>
                 {" "}
                 {
                   assessment.duration
@@ -212,7 +268,14 @@ function Profile() {
 
               <Typography
                 color="text.secondary"
-                mb={2}
+                sx={{
+                  mb: 2,
+
+                  fontSize: {
+                    xs: ".85rem",
+                    sm: ".95rem",
+                  },
+                }}
               >
                 {
                   assessment.createdAt
@@ -220,33 +283,40 @@ function Profile() {
               </Typography>
 
               <Stack
-                direction="row"
+                direction={{
+                  xs: "column",
+                  sm: "row",
+                }}
+
                 spacing={2}
               >
                 <Button
                   variant="contained"
-                  startIcon={
-                    <DownloadIcon />
-                  }
-                  onClick={() =>
-                    handleDownload(
-                      assessment
-                    )
-                  }
+                  startIcon={<DownloadIcon />}
+                  onClick={() => handleDownload(assessment)}
+                  sx={{
+                    width: {
+                      xs: "100%",
+                      sm: "auto",
+                    },
+
+                    background:
+                      "linear-gradient(90deg,#8B5CF6,#7C3AED)",
+                  }}
                 >
                   Download
                 </Button>
 
                 <Button
                   color="error"
-                  startIcon={
-                    <DeleteIcon />
-                  }
-                  onClick={() =>
-                    handleDelete(
-                      assessment.id
-                    )
-                  }
+                  startIcon={<DeleteIcon />}
+                  onClick={() => handleDelete(assessment.id)}
+                  sx={{
+                    width: {
+                      xs: "100%",
+                      sm: "auto",
+                    },
+                  }}
                 >
                   Delete
                 </Button>
