@@ -4,6 +4,8 @@ import {
   Box,
 } from "@mui/material";
 
+import { toast } from "react-toastify";
+
 function UploadSection({
   setFile,
 }) {
@@ -19,6 +21,10 @@ function UploadSection({
     console.log("File Size:", selectedFile.size);
 
     setFile(selectedFile);
+
+    toast.success(
+      `📄 ${selectedFile.name} uploaded successfully!`
+    );
   };
 
   return (
